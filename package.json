@@ -1,0 +1,19 @@
+{
+  "name": "pick-planner",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "keywords": [],
+  "author": "Rafael Espinoza <rafael@rafaelespinoza.com> (www.rafaelespinoza.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^0.19.1"
+  },
+  "ava": {
+    "verbose": true,
+    "tap": false
+  }
+}

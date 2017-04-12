@@ -4,16 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "ava"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "ava",
+    "eject": "react-scripts eject"
   },
   "keywords": [],
   "author": "Rafael Espinoza <rafael@rafaelespinoza.com> (www.rafaelespinoza.com)",
   "license": "ISC",
   "devDependencies": {
-    "ava": "^0.19.1"
+    "ava": "^0.19.1",
+    "react-scripts": "^0.9.5"
   },
   "ava": {
     "verbose": true,
     "tap": false
+  },
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "semantic-ui-react": "^0.67.2"
   }
 }

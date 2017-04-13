@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Dropdown, Input } from 'semantic-ui-react';
-import { calculatePickCounts } from '../calculator/index.js';
+import Qty from './Qty.jsx'
+import { calculatePickCounts } from '../../calculator/index.js';
 
 class Pack extends Component {
   constructor(props) {
@@ -8,7 +9,9 @@ class Pack extends Component {
 
     this.state = {
       packName: null,
-      quantity: 1
+      quantity: 1,
+      pickCountsObj: null,
+      pickCounts: null
     };
 
     this.handleSelect = this.handleSelect.bind(this);
@@ -39,21 +42,29 @@ class Pack extends Component {
       const qty = pickCountsObj[key];
       return `${key}: ${qty}`;
     }).join(' | ');
-    this.setState({ pickCounts });
+    this.setState({ pickCountsObj, pickCounts });
   }
 
   render() {
+    const { pickCountsObj } = this.state;
+
+    if (!!pickCountsObj) {
+      var { standard_14, tri_14, jazz_14, standard_09, tri_09, jazz_09 } = pickCountsObj;
+    }
+
     return (
       <Grid.Row divided>
-        <Grid.Column width={4}>
+        <Grid.Column></Grid.Column>
+        <Grid.Column width="4">
           <Dropdown
             options={this.props.options}
             placeholder="Select pack"
             onChange={this.handleSelect}
           />
         </Grid.Column>
-        <Grid.Column width={1}>
+        <Grid.Column width="2">
           <Input
+            className="pack-qty"
             placeholder="qty"
             type="number"
             size="mini"
@@ -61,9 +72,14 @@ class Pack extends Component {
             value={this.state.quantity}
           />
         </Grid.Column>
-        <code>
-          {this.state.pickCounts}
-        </code>
+        <Qty qty={standard_14} />
+        <Qty qty={tri_14} />
+        <Qty qty={jazz_14} />
+        <Grid.Column width="2" color="black"></Grid.Column>
+        <Qty qty={standard_09} />
+        <Qty qty={tri_09} />
+        <Qty qty={jazz_09} />
+        <Grid.Column></Grid.Column>
       </Grid.Row>
     );
   }

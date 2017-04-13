@@ -18,28 +18,22 @@ class App extends Component {
 
   render() {
     return (
-      <Container text className="App">
+      <Container className="App">
         <Grid celled="internally" container>
           <Grid.Row>
-            <Grid.Column></Grid.Column>
-            <Grid.Column width="6" color="grey"></Grid.Column>
-            <Grid.Column width="3">1.4mm</Grid.Column>
-            <Grid.Column width="2" color="black"></Grid.Column>
-            <Grid.Column width="3">0.9mm</Grid.Column>
-            <Grid.Column></Grid.Column>
+            <Grid.Column width="4" color="grey"></Grid.Column>
+            <Grid.Column width="6">1.4mm</Grid.Column>
+            <Grid.Column width="6">0.9mm</Grid.Column>
           </Grid.Row>
           <Grid.Row>
-            <Grid.Column></Grid.Column>
-            <Grid.Column width="4">Pack</Grid.Column>
-            <Grid.Column width="2">Qty</Grid.Column>
-            <Grid.Column>St</Grid.Column>
-            <Grid.Column>Tri</Grid.Column>
-            <Grid.Column>Jazz</Grid.Column>
-            <Grid.Column width="2" color="black"></Grid.Column>
-            <Grid.Column>St</Grid.Column>
-            <Grid.Column>Tri</Grid.Column>
-            <Grid.Column>Jazz</Grid.Column>
-            <Grid.Column></Grid.Column>
+            <Grid.Column width="3">Pack</Grid.Column>
+            <Grid.Column width="1">Qty</Grid.Column>
+            <Grid.Column width="2">St</Grid.Column>
+            <Grid.Column width="2">Tri</Grid.Column>
+            <Grid.Column width="2">Jazz</Grid.Column>
+            <Grid.Column width="2">St</Grid.Column>
+            <Grid.Column width="2">Tri</Grid.Column>
+            <Grid.Column width="2">Jazz</Grid.Column>
           </Grid.Row>
           <Pack options={PACKS_ARR} />
         </Grid>

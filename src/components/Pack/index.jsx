@@ -54,15 +54,14 @@ class Pack extends Component {
 
     return (
       <Grid.Row divided>
-        <Grid.Column></Grid.Column>
-        <Grid.Column width="4">
+        <Grid.Column width="3">
           <Dropdown
             options={this.props.options}
             placeholder="Select pack"
             onChange={this.handleSelect}
           />
         </Grid.Column>
-        <Grid.Column width="2">
+        <Grid.Column width="1">
           <Input
             className="pack-qty"
             placeholder="qty"
@@ -75,11 +74,9 @@ class Pack extends Component {
         <Qty qty={standard_14} />
         <Qty qty={tri_14} />
         <Qty qty={jazz_14} />
-        <Grid.Column width="2" color="black"></Grid.Column>
         <Qty qty={standard_09} />
         <Qty qty={tri_09} />
         <Qty qty={jazz_09} />
-        <Grid.Column></Grid.Column>
       </Grid.Row>
     );
   }

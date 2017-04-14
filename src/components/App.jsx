@@ -104,9 +104,9 @@ class App extends Component {
 
     return (
       <Container className="App">
-        <Grid celled="internally" container>
+        <Grid celled="internally" container textAlign="center" padded>
           <Grid.Row>
-            <Grid.Column width="8" color="grey"></Grid.Column>
+            <Grid.Column width="8">Pick Planner</Grid.Column>
             <Grid.Column width="4">1.4mm</Grid.Column>
             <Grid.Column width="4">0.9mm</Grid.Column>
           </Grid.Row>
@@ -125,7 +125,11 @@ class App extends Component {
           </Grid.Row>
           {!!packs ? renderPacks(packs, this.handleSelect, this.handleInput, this.remPackRow) : null}
           <Totals totalsByPick={totalsByPick} totalPicks={totalPicks} />
-          <Icon name="add circle" link onClick={this.addPackRow} />
+          <Grid.Row>
+            <Grid.Column textAlign="left" width="16">
+              <Icon name="add circle" link onClick={this.addPackRow} />
+            </Grid.Column>
+          </Grid.Row>
         </Grid>
       </Container>
     );

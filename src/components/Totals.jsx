@@ -8,8 +8,7 @@ const Totals = ({ totalsByPick, totalPicks }) => {
 
   return (
     <Grid.Row>
-      <Grid.Column></Grid.Column>
-      <Grid.Column width="7"></Grid.Column>
+      <Grid.Column width="8">Totals...</Grid.Column>
       <Grid.Column>{standard_14}</Grid.Column>
       <Grid.Column>{tri_14}</Grid.Column>
       <Grid.Column>{jazz_14}</Grid.Column>

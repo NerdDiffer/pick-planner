@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Grid, Dropdown, Input } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 import Pack from './Pack';
 import PACKS from '../calculator/packs.js';
-import { calculateOrder } from '../calculator/index.js';
+import { findPackId, cloneArrOfObj } from '../utils.js';
+// import { calculateOrder } from '../calculator/index.js';
 
 const PACKS_ARR = [];
 for (let packName in PACKS) {
@@ -13,10 +14,41 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      //packs: null, // object: keys => packName, values => quantity
+      //packs: [{ 'P-Samp-M': 4 }]
+      packs: [{ packId: 0, name: 'P-Samp-M', qty: 200 }]
+    };
+
+    this.handleSelect = this.handleSelect.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+  }
+
+  handleSelect(packId, name) {
+    const ind = findPackId(this.state.packs, packId);
+
+    if (ind > -1) {
+      const packs = cloneArrOfObj(this.state.packs);
+      const { qty } = packs[ind];
+      packs.splice(ind, 1, { packId, name, qty });
+      this.setState({ packs });
+    }
+  }
+
+  handleInput(packId, packQty) {
+    const ind = findPackId(this.state.packs, packId);
+
+    if (ind > -1) {
+      const packs = cloneArrOfObj(this.state.packs);
+      const { name } = packs[ind];
+      packs.splice(ind, 1, { packId, name, qty: packQty });
+      this.setState({ packs });
+    }
   }
 
   render() {
+    const { packs } = this.state;
+
     return (
       <Container className="App">
         <Grid celled="internally" container>
@@ -35,7 +67,7 @@ class App extends Component {
             <Grid.Column width="2">Tri</Grid.Column>
             <Grid.Column width="2">Jazz</Grid.Column>
           </Grid.Row>
-          <Pack options={PACKS_ARR} />
+          {!!packs ? renderPacks(packs, this.handleSelect, this.handleInput) : null}
         </Grid>
       </Container>
     );
@@ -43,3 +75,22 @@ class App extends Component {
 }
 
 export default App;
+
+function renderPacks(packs, handleSelect, handleInput) {
+  return packs.reduce((list, pack, ind) => {
+    const { name, qty } = pack;
+    const key = `${ind}::${name}`;
+
+    return (
+      <Pack
+        options={PACKS_ARR}
+        name={name}
+        qty={qty}
+        handleInput={handleInput}
+        handleSelect={handleSelect}
+        packId={ind}
+        key={key}
+      />
+    );
+  }, []);
+}

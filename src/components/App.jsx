@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Grid } from 'semantic-ui-react';
+import { Container, Grid, Icon } from 'semantic-ui-react';
 import Pack from './Pack';
 import PACKS from '../calculator/packs.js';
-import { findPackId, cloneArrOfObj } from '../utils.js';
+import { findPackId, clone } from '../utils.js';
 // import { calculateOrder } from '../calculator/index.js';
 
 const PACKS_ARR = [];
@@ -17,33 +17,41 @@ class App extends Component {
     this.state = {
       //packs: null, // object: keys => packName, values => quantity
       //packs: [{ 'P-Samp-M': 4 }]
-      packs: [{ packId: 0, name: 'P-Samp-M', qty: 200 }]
+      packs: [createPackData(0, 'P-Samp-M', 200)]
     };
 
     this.handleSelect = this.handleSelect.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.addPackRow = this.addPackRow.bind(this);
   }
 
   handleSelect(packId, name) {
     const ind = findPackId(this.state.packs, packId);
 
     if (ind > -1) {
-      const packs = cloneArrOfObj(this.state.packs);
+      const packs = clone(this.state.packs);
       const { qty } = packs[ind];
-      packs.splice(ind, 1, { packId, name, qty });
+      packs.splice(ind, 1, createPackData(packId, name, qty));
       this.setState({ packs });
     }
   }
 
-  handleInput(packId, packQty) {
+  handleInput(packId, qty) {
     const ind = findPackId(this.state.packs, packId);
 
     if (ind > -1) {
-      const packs = cloneArrOfObj(this.state.packs);
+      const packs = clone(this.state.packs);
       const { name } = packs[ind];
-      packs.splice(ind, 1, { packId, name, qty: packQty });
+      packs.splice(ind, 1, createPackData(packId, name, qty));
       this.setState({ packs });
     }
+  }
+
+  addPackRow() {
+    const packs = clone(this.state.packs);
+    const row = createPackData(packs.length, 'P-Samp-M');
+    const newPacks = packs.concat(row);
+    this.setState({ packs: newPacks });
   }
 
   render() {
@@ -68,6 +76,7 @@ class App extends Component {
             <Grid.Column width="2">Jazz</Grid.Column>
           </Grid.Row>
           {!!packs ? renderPacks(packs, this.handleSelect, this.handleInput) : null}
+          <Icon name="add circle" link onClick={this.addPackRow} />
         </Grid>
       </Container>
     );
@@ -77,11 +86,12 @@ class App extends Component {
 export default App;
 
 function renderPacks(packs, handleSelect, handleInput) {
+  console.log(packs);
   return packs.reduce((list, pack, ind) => {
     const { name, qty } = pack;
     const key = `${ind}::${name}`;
 
-    return (
+    return list.concat(
       <Pack
         options={PACKS_ARR}
         name={name}
@@ -93,4 +103,9 @@ function renderPacks(packs, handleSelect, handleInput) {
       />
     );
   }, []);
+}
+
+// packs: [{ packId: 0, name: 'P-Samp-M', qty: 200 }]
+function createPackData(packId, name, qty = 1) {
+  return { packId, name, qty };
 }

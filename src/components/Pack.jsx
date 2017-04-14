@@ -3,7 +3,7 @@ import { Grid, Dropdown, Input } from 'semantic-ui-react';
 import { calculatePickCounts } from '../calculator/index.js';
 
 const Qty = ({ qty }) => (
-  <Grid.Column width="2">{qty === undefined ? null : qty}</Grid.Column>
+  <Grid.Column width="1">{qty === undefined ? null : qty}</Grid.Column>
 );
 
 class Pack extends Component {
@@ -51,7 +51,8 @@ class Pack extends Component {
 
     return (
       <Grid.Row divided>
-        <Grid.Column width="3">
+        <Grid.Column></Grid.Column>
+        <Grid.Column width="5">
           <Dropdown
             options={options}
             placeholder="Select pack"
@@ -59,7 +60,7 @@ class Pack extends Component {
             value={name}
           />
         </Grid.Column>
-        <Grid.Column width="1">
+        <Grid.Column width="2">
           <Input
             className="pack-qty"
             placeholder="qty"
@@ -72,9 +73,11 @@ class Pack extends Component {
         <Qty qty={standard_14} />
         <Qty qty={tri_14} />
         <Qty qty={jazz_14} />
+        <Grid.Column></Grid.Column>
         <Qty qty={standard_09} />
         <Qty qty={tri_09} />
         <Qty qty={jazz_09} />
+        <Grid.Column></Grid.Column>
       </Grid.Row>
     );
   }

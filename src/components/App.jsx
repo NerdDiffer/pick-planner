@@ -61,19 +61,22 @@ class App extends Component {
       <Container className="App">
         <Grid celled="internally" container>
           <Grid.Row>
-            <Grid.Column width="4" color="grey"></Grid.Column>
-            <Grid.Column width="6">1.4mm</Grid.Column>
-            <Grid.Column width="6">0.9mm</Grid.Column>
+            <Grid.Column width="8" color="grey"></Grid.Column>
+            <Grid.Column width="4">1.4mm</Grid.Column>
+            <Grid.Column width="4">0.9mm</Grid.Column>
           </Grid.Row>
           <Grid.Row>
-            <Grid.Column width="3">Pack</Grid.Column>
-            <Grid.Column width="1">Qty</Grid.Column>
-            <Grid.Column width="2">St</Grid.Column>
-            <Grid.Column width="2">Tri</Grid.Column>
-            <Grid.Column width="2">Jazz</Grid.Column>
-            <Grid.Column width="2">St</Grid.Column>
-            <Grid.Column width="2">Tri</Grid.Column>
-            <Grid.Column width="2">Jazz</Grid.Column>
+            <Grid.Column></Grid.Column>
+            <Grid.Column width="5">Pack</Grid.Column>
+            <Grid.Column width="2">Qty</Grid.Column>
+            <Grid.Column width="1">St</Grid.Column>
+            <Grid.Column width="1">Tri</Grid.Column>
+            <Grid.Column width="1">Jazz</Grid.Column>
+            <Grid.Column></Grid.Column>
+            <Grid.Column width="1">St</Grid.Column>
+            <Grid.Column width="1">Tri</Grid.Column>
+            <Grid.Column width="1">Jazz</Grid.Column>
+            <Grid.Column></Grid.Column>
           </Grid.Row>
           {!!packs ? renderPacks(packs, this.handleSelect, this.handleInput) : null}
           <Icon name="add circle" link onClick={this.addPackRow} />

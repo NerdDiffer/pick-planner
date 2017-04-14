@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Dropdown, Input } from 'semantic-ui-react';
+import { Grid, Dropdown, Input, Icon } from 'semantic-ui-react';
 import { calculatePickCounts } from '../calculator/index.js';
 
 const Qty = ({ qty }) => (
@@ -16,6 +16,7 @@ class Pack extends Component {
 
     this.handleSelectPack = this.handleSelectPack.bind(this);
     this.handleInputQty = this.handleInputQty.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -40,6 +41,12 @@ class Pack extends Component {
     handleInput(packId, value)
   }
 
+  handleRemove(ev) {
+    ev.preventDefault();
+    const { packId, remPackRow } = this.props;
+    remPackRow(packId);
+  }
+
   render() {
     const { options, name, qty } = this.props;
     const { pickCounts } = this.state;
@@ -51,7 +58,9 @@ class Pack extends Component {
 
     return (
       <Grid.Row divided>
-        <Grid.Column></Grid.Column>
+        <Grid.Column>
+          <Icon name="minus circle" link onClick={this.handleRemove} />
+        </Grid.Column>
         <Grid.Column width="5">
           <Dropdown
             options={options}

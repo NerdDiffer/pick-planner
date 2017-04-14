@@ -23,6 +23,7 @@ class App extends Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.addPackRow = this.addPackRow.bind(this);
+    this.remPackRow = this.remPackRow.bind(this);
   }
 
   handleSelect(packId, name) {
@@ -54,6 +55,16 @@ class App extends Component {
     this.setState({ packs: newPacks });
   }
 
+  remPackRow(packId) {
+    const ind = findPackId(this.state.packs, packId);
+
+    if (ind > -1) {
+      const packs = clone(this.state.packs);
+      packs.splice(ind, 1);
+      this.setState({ packs });
+    }
+  }
+
   render() {
     const { packs } = this.state;
 
@@ -78,7 +89,7 @@ class App extends Component {
             <Grid.Column width="1">Jazz</Grid.Column>
             <Grid.Column></Grid.Column>
           </Grid.Row>
-          {!!packs ? renderPacks(packs, this.handleSelect, this.handleInput) : null}
+          {!!packs ? renderPacks(packs, this.handleSelect, this.handleInput, this.remPackRow) : null}
           <Icon name="add circle" link onClick={this.addPackRow} />
         </Grid>
       </Container>
@@ -88,8 +99,7 @@ class App extends Component {
 
 export default App;
 
-function renderPacks(packs, handleSelect, handleInput) {
-  console.log(packs);
+function renderPacks(packs, handleSelect, handleInput, remPackRow) {
   return packs.reduce((list, pack, ind) => {
     const { name, qty } = pack;
     const key = `${ind}::${name}`;
@@ -101,6 +111,7 @@ function renderPacks(packs, handleSelect, handleInput) {
         qty={qty}
         handleInput={handleInput}
         handleSelect={handleSelect}
+        remPackRow={remPackRow}
         packId={ind}
         key={key}
       />

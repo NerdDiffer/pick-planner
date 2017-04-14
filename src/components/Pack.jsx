@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Grid, Dropdown, Input, Icon } from 'semantic-ui-react';
-import { calculatePickCounts } from '../calculator/index.js';
 
 const Qty = ({ qty }) => (
   <Grid.Column width="1">{qty === undefined ? null : qty}</Grid.Column>
@@ -9,24 +8,10 @@ const Qty = ({ qty }) => (
 class Pack extends Component {
   constructor(props) {
     super(props);
-    const { name, qty } = props;
-    this.state = {
-      pickCounts: calculatePickCounts(name, qty)
-    };
 
     this.handleSelectPack = this.handleSelectPack.bind(this);
     this.handleInputQty = this.handleInputQty.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { name: nextName, qty: nextQty } = nextProps;
-    const { name: currName, qty: currQty } = this.props;
-
-    if (nextName !== currName || nextQty !== currQty) {
-      const pickCounts = calculatePickCounts(nextName, nextQty);
-      this.setState({ pickCounts });
-    }
   }
 
   handleSelectPack(_ev, data) {
@@ -48,8 +33,7 @@ class Pack extends Component {
   }
 
   render() {
-    const { options, name, qty } = this.props;
-    const { pickCounts } = this.state;
+    const { options, name, qty, pickCounts } = this.props;
 
     if (!!pickCounts) {
       // using `var` b/c of conditional destructuring. do *not* want block-scoping.

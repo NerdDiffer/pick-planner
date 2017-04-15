@@ -40,6 +40,8 @@ class Pack extends Component {
       var { standard_14, tri_14, jazz_14, standard_09, tri_09, jazz_09 } = pickCounts;
     }
 
+    const totalInPack = !!qty ? qty * 6 : null;
+
     return (
       <Grid.Row divided>
         <Grid.Column>
@@ -66,11 +68,10 @@ class Pack extends Component {
         <Qty qty={standard_14} />
         <Qty qty={tri_14} />
         <Qty qty={jazz_14} />
-        <Grid.Column></Grid.Column>
         <Qty qty={standard_09} />
         <Qty qty={tri_09} />
         <Qty qty={jazz_09} />
-        <Grid.Column></Grid.Column>
+        <Grid.Column className="total">{totalInPack}</Grid.Column>
       </Grid.Row>
     );
   }

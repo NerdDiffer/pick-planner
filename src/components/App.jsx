@@ -105,31 +105,32 @@ class App extends Component {
     return (
       <Container className="App">
         <Grid celled="internally" container textAlign="center" padded>
-          <Grid.Row>
+          <Grid.Row className="pick-header">
             <Grid.Column width="8">Pick Planner</Grid.Column>
-            <Grid.Column width="4">1.4mm</Grid.Column>
-            <Grid.Column width="4">0.9mm</Grid.Column>
+            <Grid.Column width="3">1.4mm</Grid.Column>
+            <Grid.Column width="3">0.9mm</Grid.Column>
+            <Grid.Column>
+              <a href="https://github.com/NerdDiffer/pick-planner" target="_blank">
+                <Icon name="github" color="black" size="large" />
+              </a>
+            </Grid.Column>
           </Grid.Row>
-          <Grid.Row>
-            <Grid.Column></Grid.Column>
+          <Grid.Row className="pick-subheader">
+            <Grid.Column>
+              <Icon name="add circle" link onClick={this.addPackRow} />
+            </Grid.Column>
             <Grid.Column width="5">Pack</Grid.Column>
             <Grid.Column width="2">Qty</Grid.Column>
             <Grid.Column width="1">St</Grid.Column>
             <Grid.Column width="1">Tri</Grid.Column>
             <Grid.Column width="1">Jazz</Grid.Column>
-            <Grid.Column></Grid.Column>
             <Grid.Column width="1">St</Grid.Column>
             <Grid.Column width="1">Tri</Grid.Column>
             <Grid.Column width="1">Jazz</Grid.Column>
-            <Grid.Column></Grid.Column>
+            <Grid.Column>Totals</Grid.Column>
           </Grid.Row>
           {!!packs ? renderPacks(packs, this.handleSelect, this.handleInput, this.remPackRow) : null}
           <Totals totalsByPick={totalsByPick} totalPicks={totalPicks} />
-          <Grid.Row>
-            <Grid.Column textAlign="left" width="16">
-              <Icon name="add circle" link onClick={this.addPackRow} />
-            </Grid.Column>
-          </Grid.Row>
         </Grid>
       </Container>
     );

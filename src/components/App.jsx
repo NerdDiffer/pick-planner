@@ -18,7 +18,7 @@ class App extends Component {
     this.state = {
       //packs: null, // object: keys => packName, values => quantity
       //packs: [{ 'P-Samp-M': 4 }]
-      packs: [createPackData(0, 'P-Samp-M', 200)],
+      packs: [createPackData(0, 'P-Samp-M', 100)],
       totalsByPick: null,
       totalPicks: null
     };
@@ -57,7 +57,7 @@ class App extends Component {
     const packs = clone(this.state.packs);
     // to allow user to change order of rows, would need to figure out a better
     // way to track rows by ID. start it here.
-    const row = createPackData(packs.length, 'P-Samp-M');
+    const row = createPackData(packs.length, 'P-Samp-M', 0);
     packs.push(row);
     this.setState({ packs });
   }
@@ -68,7 +68,14 @@ class App extends Component {
     if (ind > -1) {
       const packs = clone(this.state.packs);
       packs.splice(ind, 1);
-      this.setState({ packs });
+      // decrement packId for each pack that came after pack you just removed
+      let pack;
+      for (let i = ind; i < packs.length; i++) {
+        pack = packs[i];
+        pack.packId -= 1;
+      }
+
+      this.setState({ packs }, this.updateTotals);
     }
   }
 
@@ -161,6 +168,6 @@ function renderPacks(packs, handleSelect, handleInput, remPackRow) {
 }
 
 // packs: [{ packId: 0, name: 'P-Samp-M', qty: 200 }]
-function createPackData(packId, name, qty = 1) {
+function createPackData(packId, name, qty) {
   return { packId, name, qty, pickCounts: null };
 }

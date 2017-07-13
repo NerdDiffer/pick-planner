@@ -9,6 +9,9 @@
     "test": "ava",
     "eject": "react-scripts eject"
   },
+  "engine": {
+    "node": "6.11.1"
+  },
   "keywords": [],
   "author": "Rafael Espinoza <rafael@rafaelespinoza.com> (www.rafaelespinoza.com)",
   "license": "ISC",
